@@ -71,6 +71,13 @@
   filter: drop-shadow(2px 2px 0 black);
 }
 
+.hint-button:disabled {
+  cursor: not-allowed;
+  background-color: rgb(205, 246, 178);
+  transform: none;
+  filter: none;
+}
+
 .hint-num {
   position: absolute;
 }

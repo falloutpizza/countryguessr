@@ -1,10 +1,26 @@
 import React, { useState } from "react";
 
-export default function Question({ country, nextQuestion }) {
-  const [hint1, setHint1] = useState("hint #1");
-  const [hint2, setHint2] = useState("hint #2");
-  const [hint3, setHint3] = useState("hint #3");
+function HintButton({ hintNum, hintTxt, clickable, setNext }) {
+  const [hintText, setHintText] = useState(hintNum);
+  return (
+    <button
+      className="hint-button"
+      onClick={() => {
+        setHintText(hintTxt);
+        if (setNext) {
+          setNext(true);
+        }
+      }}
+      disabled={clickable ? false : true}
+    >
+      <span className="hint-text">{hintText}</span>
+    </button>
+  );
+}
 
+export default function Question({ country, nextQuestion }) {
+  const [hint2, setHint2] = useState(false);
+  const [hint3, setHint3] = useState(false);
   return (
     <div className="row">
       <div className="count-image-container col">
@@ -12,15 +28,24 @@ export default function Question({ country, nextQuestion }) {
       </div>
       <div className="count-hints-container col">
         <h2 className="guess-text">guess the country!</h2>
-        <button className="hint-button" onClick={() => setHint1(country.hint1)}>
-          <span className="hint-text">{hint1}</span>
-        </button>
-        <button className="hint-button" onClick={() => setHint2(country.hint2)}>
-          <span className="hint-text">{hint2}</span>
-        </button>
-        <button className="hint-button" onClick={() => setHint3(country.hint3)}>
-          <span className="hint-text">{hint3}</span>
-        </button>
+        <HintButton
+          hintNum={"hint #1"}
+          hintTxt={country.hint1}
+          clickable={true}
+          setNext={setHint2}
+        />
+        <HintButton
+          hintNum={"hint #2"}
+          hintTxt={country.hint2}
+          clickable={hint2}
+          setNext={setHint3}
+        />
+        <HintButton
+          hintNum={"hint #3"}
+          hintTxt={country.hint3}
+          clickable={hint3}
+          setNext={""}
+        />
       </div>
     </div>
   );
