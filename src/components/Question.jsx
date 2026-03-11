@@ -18,17 +18,22 @@ function HintButton({ hintNum, hintTxt, clickable, setNext }) {
   );
 }
 
-function Guess() {
-  const [guess, setGuess] = useState("");
+function Guess({ setGuess }) {
+  const [curGuess, setCurGuess] = useState("");
+
   function handleChange(e) {
-    setGuess(e.target.value);
+    setCurGuess(e.target.value);
+  }
+  function handleSubmit(e) {
+    e.preventDefault();
+    setGuess(e.target[0].value);
   }
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <input
         type="text"
-        value={guess}
+        value={curGuess}
         onChange={handleChange}
         placeholder="enter your guess:"
       />
@@ -36,9 +41,23 @@ function Guess() {
   );
 }
 
+function Results({ guess, answer }) {
+  console.log(guess, answer);
+  let message;
+  if (guess.toLowerCase() == answer.toLowerCase()) {
+    message = "congrats, you guessed correctly!!";
+  } else {
+    message = "unfortunately, you did not guess correctly :(";
+  }
+  return <h3>{message}</h3>;
+}
+
 export default function Question({ country, nextQuestion }) {
   const [hint2, setHint2] = useState(false);
   const [hint3, setHint3] = useState(false);
+
+  const [guess, setGuess] = useState("");
+
   return (
     <div className="row">
       <div className="count-image-container col">
@@ -46,7 +65,8 @@ export default function Question({ country, nextQuestion }) {
       </div>
       <div className="count-hints-container col">
         <h2 className="guess-text">guess the country!</h2>
-        <Guess />
+        <Guess setGuess={setGuess} />
+        {guess && <Results guess={guess} answer={country.name} />}
         <HintButton
           hintNum={"hint #1"}
           hintTxt={country.hint1}
