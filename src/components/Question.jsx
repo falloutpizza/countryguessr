@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function HintButton({ hintNum, hintTxt, clickable, setNext }) {
+function HintButton({ hintNum, hintTxt, clickable, setNext, guessed }) {
   const [hintText, setHintText] = useState(hintNum);
   return (
     <button
@@ -11,9 +11,9 @@ function HintButton({ hintNum, hintTxt, clickable, setNext }) {
           setNext(true);
         }
       }}
-      disabled={clickable ? false : true}
+      disabled={clickable || guessed ? false : true}
     >
-      <span className="hint-text">{hintText}</span>
+      <span className="hint-text">{guessed ? hintTxt : hintText}</span>
     </button>
   );
 }
@@ -42,12 +42,11 @@ function Guess({ setGuess }) {
 }
 
 function Results({ guess, answer }) {
-  console.log(guess, answer);
   let message;
   if (guess.toLowerCase() == answer.toLowerCase()) {
     message = "congrats, you guessed correctly!!";
   } else {
-    message = "unfortunately, you did not guess correctly :(";
+    message = `unfortunately, you did not guess correctly :( the correct answer was: ${answer}`;
   }
   return <h3>{message}</h3>;
 }
@@ -72,18 +71,21 @@ export default function Question({ country, nextQuestion }) {
           hintTxt={country.hint1}
           clickable={true}
           setNext={setHint2}
+          guessed={guess}
         />
         <HintButton
           hintNum={"hint #2"}
           hintTxt={country.hint2}
           clickable={hint2}
           setNext={setHint3}
+          guessed={guess}
         />
         <HintButton
           hintNum={"hint #3"}
           hintTxt={country.hint3}
           clickable={hint3}
           setNext={""}
+          guessed={guess}
         />
       </div>
     </div>

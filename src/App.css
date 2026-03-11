@@ -9,6 +9,10 @@
   font-family: "Roboto Mono", monospace;
 }
 
+h3 {
+  font-size: 1rem;
+}
+
 .main-container {
   background-color: aliceblue;
   height: 500px;
