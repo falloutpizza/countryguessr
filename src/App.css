@@ -81,3 +81,8 @@
 .hint-num {
   position: absolute;
 }
+
+input {
+  margin: 10px;
+  padding: 2px 5px;
+}

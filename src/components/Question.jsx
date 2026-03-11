@@ -18,6 +18,24 @@ function HintButton({ hintNum, hintTxt, clickable, setNext }) {
   );
 }
 
+function Guess() {
+  const [guess, setGuess] = useState("");
+  function handleChange(e) {
+    setGuess(e.target.value);
+  }
+
+  return (
+    <form>
+      <input
+        type="text"
+        value={guess}
+        onChange={handleChange}
+        placeholder="enter your guess:"
+      />
+    </form>
+  );
+}
+
 export default function Question({ country, nextQuestion }) {
   const [hint2, setHint2] = useState(false);
   const [hint3, setHint3] = useState(false);
@@ -28,6 +46,7 @@ export default function Question({ country, nextQuestion }) {
       </div>
       <div className="count-hints-container col">
         <h2 className="guess-text">guess the country!</h2>
+        <Guess />
         <HintButton
           hintNum={"hint #1"}
           hintTxt={country.hint1}
