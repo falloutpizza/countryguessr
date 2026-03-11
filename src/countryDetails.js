@@ -7,7 +7,7 @@ function countryDetails(countries) {
     image: `src/countries/${randomCountry.cca2.toLowerCase()}/512.png`,
     name: randomCountry.name.common,
     hint1: `This country is in ${randomCountry.region}`,
-    hint2: `The population is ${randomCountry.population}`,
+    hint2: `The population of this country is ${randomCountry.population}`,
     hint3: randomCountry.flags.alt.replaceAll(randomCountry.name.common, "???"),
   };
 }

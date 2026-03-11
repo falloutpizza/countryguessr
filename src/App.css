@@ -51,3 +51,26 @@
 .count-hints-container {
   height: 500px;
 }
+
+.guess-text {
+  margin: 20px;
+}
+
+.hint-button {
+  border-radius: 5px;
+  width: 90%;
+  margin: 5px auto;
+  background-color: rgb(162, 220, 122);
+  border: 1px solid black;
+  transition: all 0.1s ease-in-out;
+  font-size: 0.8rem;
+}
+
+.hint-button:hover {
+  transform: translateY(-5px);
+  filter: drop-shadow(2px 2px 0 black);
+}
+
+.hint-num {
+  position: absolute;
+}
