@@ -38,12 +38,16 @@
   filter: drop-shadow(2px 2px 0 black);
 }
 
-.count-image {
-  background-color: blanchedalmond;
+.count-image-container {
   height: 500px;
+  overflow: hidden;
 }
 
-.count-hints {
-  background-color: aqua;
+.count-image {
+  height: 400px;
+  margin: 50px auto;
+}
+
+.count-hints-container {
   height: 500px;
 }
