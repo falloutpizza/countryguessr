@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 
-function HintButton({ hintNum, hintTxt, clickable, setNext, guessed }) {
+function HintButton({
+  hintNum,
+  hintTxt,
+  clickable,
+  setNext,
+  guessed,
+  country,
+}) {
   const [hintText, setHintText] = useState(hintNum);
   return (
     <button
@@ -13,7 +20,9 @@ function HintButton({ hintNum, hintTxt, clickable, setNext, guessed }) {
       }}
       disabled={clickable || guessed ? false : true}
     >
-      <span className="hint-text">{guessed ? hintTxt : hintText}</span>
+      <span className="hint-text">
+        {guessed ? hintTxt.replace("???", country) : hintText}
+      </span>
     </button>
   );
 }
@@ -72,6 +81,7 @@ export default function Question({ country, nextQuestion }) {
           clickable={true}
           setNext={setHint2}
           guessed={guess}
+          country={country.name}
         />
         <HintButton
           hintNum={"hint #2"}
@@ -79,6 +89,7 @@ export default function Question({ country, nextQuestion }) {
           clickable={hint2}
           setNext={setHint3}
           guessed={guess}
+          country={country.name}
         />
         <HintButton
           hintNum={"hint #3"}
@@ -86,6 +97,7 @@ export default function Question({ country, nextQuestion }) {
           clickable={hint3}
           setNext={""}
           guessed={guess}
+          country={country.name}
         />
       </div>
     </div>
