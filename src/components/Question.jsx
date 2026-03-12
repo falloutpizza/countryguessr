@@ -28,6 +28,7 @@ function HintButton({
 }
 
 function Guess({ setGuess, countryList }) {
+  const [guessed, setGuessed] = useState(false);
   const [curGuess, setCurGuess] = useState("");
   const [filteredList, setFilteredList] = useState([]);
 
@@ -47,6 +48,7 @@ function Guess({ setGuess, countryList }) {
   function handleSubmit(e) {
     e.preventDefault();
     setGuess(e.target[0].value);
+    setGuessed(true);
   }
 
   return (
@@ -60,7 +62,7 @@ function Guess({ setGuess, countryList }) {
         />
       </form>
       <div className="search-results">
-        {filteredList.length > 0 ? (
+        {filteredList.length && !guessed > 0 ? (
           <ul className="list-group">
             {filteredList.map((item, index) => (
               <li
@@ -74,7 +76,7 @@ function Guess({ setGuess, countryList }) {
           </ul>
         ) : (
           <ul className="list-group">
-            <li className="list-group-item">no results found</li>
+            {!guessed && <li className="list-group-item">no results found</li>}
           </ul>
         )}
       </div>
