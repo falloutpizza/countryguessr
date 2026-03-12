@@ -42,7 +42,11 @@ function App() {
     <div className="main-container container-fluid">
       {!started && <StartMenu started={started} setStarted={setStarted} />}
       {started && country && (
-        <Question country={country} nextQuestion={loadRandomCountry} />
+        <Question
+          country={country}
+          nextQuestion={loadRandomCountry}
+          countryList={countries}
+        />
       )}
     </div>
   );

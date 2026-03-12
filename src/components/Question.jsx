@@ -27,26 +27,58 @@ function HintButton({
   );
 }
 
-function Guess({ setGuess }) {
+function Guess({ setGuess, countryList }) {
   const [curGuess, setCurGuess] = useState("");
+  const [filteredList, setFilteredList] = useState([]);
 
   function handleChange(e) {
     setCurGuess(e.target.value);
+
+    const term = e.target.value;
+    const results = countryList.filter((item) =>
+      item.name.common
+        .toLowerCase()
+        .slice(0, term.length)
+        .includes(term.toLowerCase()),
+    );
+    setFilteredList(results);
   }
+
   function handleSubmit(e) {
     e.preventDefault();
     setGuess(e.target[0].value);
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={curGuess}
-        onChange={handleChange}
-        placeholder="enter your guess:"
-      />
-    </form>
+    <div className="guess-container">
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={curGuess}
+          onChange={handleChange}
+          placeholder="enter your guess:"
+        />
+      </form>
+      <div className="search-results">
+        {filteredList.length > 0 ? (
+          <ul className="list-group">
+            {filteredList.map((item, index) => (
+              <li
+                className="list-group-item country-list-item"
+                key={index}
+                onClick={() => setCurGuess(item.name.common)}
+              >
+                {item.name.common}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <ul className="list-group">
+            <li className="list-group-item">no results found</li>
+          </ul>
+        )}
+      </div>
+    </div>
   );
 }
 
@@ -60,7 +92,7 @@ function Results({ guess, answer }) {
   return <h3>{message}</h3>;
 }
 
-export default function Question({ country, nextQuestion }) {
+export default function Question({ country, nextQuestion, countryList }) {
   const [hint2, setHint2] = useState(false);
   const [hint3, setHint3] = useState(false);
 
@@ -73,7 +105,7 @@ export default function Question({ country, nextQuestion }) {
       </div>
       <div className="count-hints-container col">
         <h2 className="guess-text">guess the country!</h2>
-        <Guess setGuess={setGuess} />
+        <Guess setGuess={setGuess} countryList={countryList} />
         {guess && <Results guess={guess} answer={country.name} />}
         <HintButton
           hintNum={"hint #1"}

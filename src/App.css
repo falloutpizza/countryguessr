@@ -54,6 +54,7 @@ h3 {
 
 .count-hints-container {
   height: 500px;
+  overflow: scroll;
 }
 
 .guess-text {
@@ -88,5 +89,21 @@ h3 {
 
 input {
   margin: 10px;
+  margin-bottom: 0px;
   padding: 2px 5px;
+  width: 60%;
+}
+
+.search-results {
+  margin: 0 auto 10px;
+  padding: 0;
+  width: 60%;
+  font-size: 0.8rem;
+  text-align: left;
+  max-height: 100px;
+  overflow: scroll;
+}
+
+.country-list-item:hover {
+  cursor: pointer;
 }
