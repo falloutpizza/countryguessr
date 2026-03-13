@@ -6,7 +6,7 @@ import "./App.css";
 
 //importing components
 import StartMenu from "./components/StartMenu";
-import Question from "./components/Question";
+import Question from "./components/QuestionMenu";
 
 //importing functions
 import countryDetails from "./countryDetails";
