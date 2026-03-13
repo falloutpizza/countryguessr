@@ -103,11 +103,22 @@ function Results({ guess, answer }) {
   return <h3>{message}</h3>;
 }
 
+function NextQuestion({ nextQuestionFunction }) {
+  return (
+    <>
+      <button className="next-ques-btn" onClick={() => nextQuestionFunction}>
+        next question
+      </button>
+    </>
+  );
+}
+
 export default function QuestionMenu({ country, nextQuestion, countryList }) {
   const [hint2, setHint2] = useState(false);
   const [hint3, setHint3] = useState(false);
 
   const [guess, setGuess] = useState("");
+  const [reset, setReset] = useState(false);
 
   return (
     <div className="row">
@@ -117,7 +128,7 @@ export default function QuestionMenu({ country, nextQuestion, countryList }) {
       <div className="count-hints-container col">
         <h2 className="guess-text">guess the country!</h2>
         <Guess setGuess={setGuess} countryList={countryList} />
-        {guess && <Results guess={guess} answer={country.name} />}
+        {guess && !reset && <Results guess={guess} answer={country.name} />}
         <HintButton
           hintNum={"hint #1"}
           hintTxt={country.hint1}
