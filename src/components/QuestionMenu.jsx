@@ -27,8 +27,7 @@ function HintButton({
   );
 }
 
-function Guess({ setGuess, countryList }) {
-  const [guessed, setGuessed] = useState(false);
+function Guess({ setGuess, countryList, guessed, setGuessed }) {
   const [curGuess, setCurGuess] = useState("");
   const [filteredList, setFilteredList] = useState([]);
 
@@ -47,8 +46,10 @@ function Guess({ setGuess, countryList }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setGuess(e.target[0].value);
-    setGuessed(true);
+    if (!guessed) {
+      setGuess(e.target[0].value);
+      setGuessed(true);
+    }
   }
 
   return (
@@ -103,44 +104,72 @@ function Results({ guess, answer }) {
   return <h3>{message}</h3>;
 }
 
+function NextQuestion({ setGuessed, setCountry, nextQuestion, country }) {
+  return (
+    <button
+      onClick={() => {
+        nextQuestion();
+        setGuessed(false);
+        setCountry(country);
+      }}
+    >
+      next question
+    </button>
+  );
+}
+
 export default function QuestionMenu({ country, nextQuestion, countryList }) {
+  const [curCountry, setCurCountry] = useState(country);
+
   const [hint2, setHint2] = useState(false);
   const [hint3, setHint3] = useState(false);
 
   const [guess, setGuess] = useState("");
+  const [guessed, setGuessed] = useState(false);
 
   return (
     <div className="row">
       <div className="count-image-container col">
-        <img src={country.image} className="count-image" />
+        <img src={curCountry.image} className="count-image" />
       </div>
       <div className="count-hints-container col">
         <h2 className="guess-text">guess the country!</h2>
-        <Guess setGuess={setGuess} countryList={countryList} />
-        {guess && <Results guess={guess} answer={country.name} />}
+        <Guess
+          setGuess={setGuess}
+          countryList={countryList}
+          guessed={guessed}
+          setGuessed={setGuessed}
+        />
+        {guessed && <Results guess={guess} answer={curCountry.name} />}
         <HintButton
           hintNum={"hint #1"}
-          hintTxt={country.hint1}
+          hintTxt={curCountry.hint1}
           clickable={true}
           setNext={setHint2}
-          guessed={guess}
-          country={country.name}
+          guessed={guessed}
+          country={curCountry.name}
         />
         <HintButton
           hintNum={"hint #2"}
-          hintTxt={country.hint2}
+          hintTxt={curCountry.hint2}
           clickable={hint2}
           setNext={setHint3}
-          guessed={guess}
-          country={country.name}
+          guessed={guessed}
+          country={curCountry.name}
         />
         <HintButton
           hintNum={"hint #3"}
-          hintTxt={country.hint3}
+          hintTxt={curCountry.hint3}
           clickable={hint3}
           setNext={""}
-          guessed={guess}
-          country={country.name}
+          guessed={guessed}
+          country={curCountry.name}
+        />
+        <NextQuestion
+          setGuessed={setGuessed}
+          setCountry={setCurCountry}
+          nextQuestion={nextQuestion}
+          country={country}
         />
       </div>
     </div>
