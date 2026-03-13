@@ -6,7 +6,7 @@ import "./App.css";
 
 //importing components
 import StartMenu from "./components/StartMenu";
-import Question from "./components/QuestionMenu";
+import QuestionMenu from "./components/QuestionMenu";
 
 //importing functions
 import countryDetails from "./countryDetails";
@@ -42,7 +42,7 @@ function App() {
     <div className="main-container container-fluid">
       {!started && <StartMenu started={started} setStarted={setStarted} />}
       {started && country && (
-        <Question
+        <QuestionMenu
           country={country}
           nextQuestion={loadRandomCountry}
           countryList={countries}

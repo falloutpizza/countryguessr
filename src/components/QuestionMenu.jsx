@@ -103,7 +103,7 @@ function Results({ guess, answer }) {
   return <h3>{message}</h3>;
 }
 
-export default function Question({ country, nextQuestion, countryList }) {
+export default function QuestionMenu({ country, nextQuestion, countryList }) {
   const [hint2, setHint2] = useState(false);
   const [hint3, setHint3] = useState(false);
 
