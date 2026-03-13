@@ -54,32 +54,41 @@ function Guess({ setGuess, countryList }) {
   return (
     <div className="guess-container">
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={curGuess}
-          onChange={handleChange}
-          placeholder="enter your guess:"
-        />
+        <div className="input-area-container">
+          <div className="input-area">
+            <input
+              type="text"
+              value={curGuess}
+              onChange={handleChange}
+              placeholder="enter your guess:"
+            />
+            <div className="search-results">
+              {filteredList.length && !guessed > 0 ? (
+                <ul className="list-group">
+                  {filteredList.map((item, index) => (
+                    <li
+                      className="list-group-item country-list-item"
+                      key={index}
+                      onClick={() => setCurGuess(item.name.common)}
+                    >
+                      {item.name.common}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <ul className="list-group">
+                  {!guessed && (
+                    <li className="list-group-item">no results found</li>
+                  )}
+                </ul>
+              )}
+            </div>
+          </div>
+          <button type="submit" className="submit-btn">
+            submit?
+          </button>
+        </div>
       </form>
-      <div className="search-results">
-        {filteredList.length && !guessed > 0 ? (
-          <ul className="list-group">
-            {filteredList.map((item, index) => (
-              <li
-                className="list-group-item country-list-item"
-                key={index}
-                onClick={() => setCurGuess(item.name.common)}
-              >
-                {item.name.common}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <ul className="list-group">
-            {!guessed && <li className="list-group-item">no results found</li>}
-          </ul>
-        )}
-      </div>
     </div>
   );
 }
