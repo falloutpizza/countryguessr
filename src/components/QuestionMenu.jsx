@@ -7,8 +7,9 @@ function HintButton({
   setNext,
   guessed,
   country,
+  hintText,
+  setHintText,
 }) {
-  const [hintText, setHintText] = useState(hintNum);
   return (
     <button
       className="hint-button"
@@ -27,7 +28,7 @@ function HintButton({
   );
 }
 
-function Guess({ setGuess, countryList, guessed, setGuessed }) {
+function Guess({ setGuess, countryList, guessed, setGuessed, nextQuestion }) {
   const [curGuess, setCurGuess] = useState("");
   const [filteredList, setFilteredList] = useState([]);
 
@@ -85,7 +86,7 @@ function Guess({ setGuess, countryList, guessed, setGuessed }) {
               )}
             </div>
           </div>
-          <button type="submit" className="submit-btn">
+          <button type="submit" className="submit-btn" onClick={nextQuestion}>
             submit?
           </button>
         </div>
@@ -104,12 +105,26 @@ function Results({ guess, answer }) {
   return <h3>{message}</h3>;
 }
 
-function NextQuestion({ setGuessed, setCountry, nextQuestion, country }) {
+function NextQuestion({
+  setGuessed,
+  setCountry,
+  nextQuestion,
+  country,
+  setHint2,
+  setHint3,
+  setHint1Text,
+  setHint2Text,
+  setHint3Text,
+}) {
   return (
     <button
       onClick={() => {
-        nextQuestion();
         setGuessed(false);
+        setHint2(false);
+        setHint3(false);
+        setHint1Text("hint #1");
+        setHint2Text("hint #2");
+        setHint3Text("hint #3");
         setCountry(country);
       }}
     >
@@ -123,6 +138,10 @@ export default function QuestionMenu({ country, nextQuestion, countryList }) {
 
   const [hint2, setHint2] = useState(false);
   const [hint3, setHint3] = useState(false);
+
+  const [hint1Text, setHint1Text] = useState("hint #1");
+  const [hint2Text, setHint2Text] = useState("hint #2");
+  const [hint3Text, setHint3Text] = useState("hint #3");
 
   const [guess, setGuess] = useState("");
   const [guessed, setGuessed] = useState(false);
@@ -139,37 +158,49 @@ export default function QuestionMenu({ country, nextQuestion, countryList }) {
           countryList={countryList}
           guessed={guessed}
           setGuessed={setGuessed}
+          nextQuestion={nextQuestion}
         />
         {guessed && <Results guess={guess} answer={curCountry.name} />}
         <HintButton
-          hintNum={"hint #1"}
+          hintNum={curCountry.hint1og}
           hintTxt={curCountry.hint1}
           clickable={true}
           setNext={setHint2}
           guessed={guessed}
           country={curCountry.name}
+          hintText={hint1Text}
+          setHintText={setHint1Text}
         />
         <HintButton
-          hintNum={"hint #2"}
+          hintNum={curCountry.hint2og}
           hintTxt={curCountry.hint2}
           clickable={hint2}
           setNext={setHint3}
           guessed={guessed}
           country={curCountry.name}
+          hintText={hint2Text}
+          setHintText={setHint2Text}
         />
         <HintButton
-          hintNum={"hint #3"}
+          hintNum={curCountry.hint3og}
           hintTxt={curCountry.hint3}
           clickable={hint3}
           setNext={""}
           guessed={guessed}
           country={curCountry.name}
+          hintText={hint3Text}
+          setHintText={setHint3Text}
         />
         <NextQuestion
           setGuessed={setGuessed}
           setCountry={setCurCountry}
           nextQuestion={nextQuestion}
           country={country}
+          setHint2={setHint2}
+          setHint3={setHint3}
+          setHint1Text={setHint1Text}
+          setHint2Text={setHint2Text}
+          setHint3Text={setHint3Text}
         />
       </div>
     </div>
