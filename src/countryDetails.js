@@ -6,10 +6,6 @@ function countryDetails(countries) {
   return {
     image: `src/countries/${randomCountry.cca2.toLowerCase()}/vector.svg`,
     name: randomCountry.name.common,
-    hint1og: "hint #1",
-    hint2og: "hint #2",
-    hint3og: "hint #3",
-    valOg: "",
     hint1: `This country is in ${randomCountry.region}`,
     hint2: `The population of this country is ${randomCountry.population}`,
     hint3: randomCountry.flags.alt.replaceAll(randomCountry.name.common, "???"),
