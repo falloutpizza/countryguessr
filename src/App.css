@@ -58,11 +58,15 @@ button:hover {
 
 .count-hints-container {
   height: 500px;
-  overflow: scroll;
 }
 
 .guess-text {
   margin: 20px;
+}
+
+.hint-container {
+  max-height: 250px;
+  overflow: scroll;
 }
 
 .hint-button {
@@ -115,4 +119,8 @@ input {
 
 .country-list-item:hover {
   cursor: pointer;
+}
+
+.next-question-btn {
+  margin-top: 10px;
 }

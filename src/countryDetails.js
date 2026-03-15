@@ -2,11 +2,21 @@
 function countryDetails(countries) {
   let random = Math.floor(Math.random() * 250 + 1);
   let randomCountry = countries[random];
+  let cont;
+  while (!randomCountry.population) {
+    random = Math.floor(Math.random() * 250 + 1);
+    randomCountry = countries[random];
+  }
+  if (randomCountry.continents[1]) {
+    cont = `${randomCountry.continents[0]} & ${randomCountry.continents[1]}`;
+  } else {
+    cont = randomCountry.continents[0];
+  }
 
   return {
     image: `src/countries/${randomCountry.cca2.toLowerCase()}/vector.svg`,
     name: randomCountry.name.common,
-    hint1: `This country is in ${randomCountry.region}`,
+    hint1: `This country is in ${cont}`,
     hint2: `The population of this country is ${randomCountry.population}`,
     hint3: randomCountry.flags.alt.replaceAll(randomCountry.name.common, "???"),
   };

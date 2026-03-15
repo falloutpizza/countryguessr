@@ -22,7 +22,7 @@ function HintButton({
       disabled={clickable || guessed ? false : true}
     >
       <span className="hint-text">
-        {guessed ? hintTxt.replace("???", country) : hintText}
+        {guessed ? hintTxt.replaceAll("???", country) : hintText}
       </span>
     </button>
   );
@@ -118,6 +118,7 @@ function NextQuestion({
 }) {
   return (
     <button
+      className="next-question-btn"
       onClick={() => {
         setGuessed(false);
         setHint2(false);
@@ -161,36 +162,38 @@ export default function QuestionMenu({ country, nextQuestion, countryList }) {
           nextQuestion={nextQuestion}
         />
         {guessed && <Results guess={guess} answer={curCountry.name} />}
-        <HintButton
-          hintNum={curCountry.hint1og}
-          hintTxt={curCountry.hint1}
-          clickable={true}
-          setNext={setHint2}
-          guessed={guessed}
-          country={curCountry.name}
-          hintText={hint1Text}
-          setHintText={setHint1Text}
-        />
-        <HintButton
-          hintNum={curCountry.hint2og}
-          hintTxt={curCountry.hint2}
-          clickable={hint2}
-          setNext={setHint3}
-          guessed={guessed}
-          country={curCountry.name}
-          hintText={hint2Text}
-          setHintText={setHint2Text}
-        />
-        <HintButton
-          hintNum={curCountry.hint3og}
-          hintTxt={curCountry.hint3}
-          clickable={hint3}
-          setNext={""}
-          guessed={guessed}
-          country={curCountry.name}
-          hintText={hint3Text}
-          setHintText={setHint3Text}
-        />
+        <div className="hint-container">
+          <HintButton
+            hintNum={curCountry.hint1og}
+            hintTxt={curCountry.hint1}
+            clickable={true}
+            setNext={setHint2}
+            guessed={guessed}
+            country={curCountry.name}
+            hintText={hint1Text}
+            setHintText={setHint1Text}
+          />
+          <HintButton
+            hintNum={curCountry.hint2og}
+            hintTxt={curCountry.hint2}
+            clickable={hint2}
+            setNext={setHint3}
+            guessed={guessed}
+            country={curCountry.name}
+            hintText={hint2Text}
+            setHintText={setHint2Text}
+          />
+          <HintButton
+            hintNum={curCountry.hint3og}
+            hintTxt={curCountry.hint3}
+            clickable={hint3}
+            setNext={""}
+            guessed={guessed}
+            country={curCountry.name}
+            hintText={hint3Text}
+            setHintText={setHint3Text}
+          />
+        </div>
         <NextQuestion
           setGuessed={setGuessed}
           setCountry={setCurCountry}

@@ -19,10 +19,13 @@ function App() {
   //fetches country data on load
   useEffect(() => {
     async function fetchCountries() {
-      const response = await axios.get(
-        "https://restcountries.com/v3.1/all?fields=name,population,flags,region,subregion,cca2",
+      let response = await axios.get(
+        "https://restcountries.com/v3.1/all?fields=name,population,flags,continents,cca2,status",
       );
-      setCountries(response.data);
+      let filteredCountries = response.data.filter(
+        (item) => item.status === "officially-assigned",
+      );
+      setCountries(filteredCountries);
     }
     fetchCountries();
   }, []);
