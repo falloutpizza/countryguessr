@@ -193,10 +193,10 @@ export default function QuestionMenu({
   return (
     <div className="row">
       <Score totalScore={totalScore} curScore={curScore} guessed={guessed} />
-      <div className="count-image-container col">
+      <div className="count-image-container col-sm">
         <img src={curCountry.image} className="count-image" />
       </div>
-      <div className="count-hints-container col">
+      <div className="count-hints-container col-sm">
         <h2 className="guess-text">guess the country!</h2>
         <Guess
           setGuess={setGuess}

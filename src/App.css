@@ -9,13 +9,43 @@
   font-family: "Roboto Mono", monospace;
 }
 
+@media (max-width: 574px) {
+  #root {
+    height: fit-content;
+  }
+  .main-container {
+    margin: 20px;
+  }
+}
+
+@media (max-width: 400px) {
+  h1 {
+    font-size: 1rem;
+  }
+  h2 {
+    font-size: 0.9rem;
+  }
+  h3,
+  input,
+  li {
+    font-size: 0.7rem;
+  }
+  .count-image {
+    margin-top: 50px !important;
+  }
+  button {
+    font-size: 0.5rem;
+    font-weight: 400;
+  }
+}
+
 h3 {
   font-size: 1rem;
 }
 
 .main-container {
   background-color: aliceblue;
-  height: 500px;
+  height: 90%;
   width: 70%;
   margin: auto;
   border-radius: 20px;
@@ -47,13 +77,15 @@ button:hover {
 }
 
 .count-image-container {
-  height: 500px;
+  max-height: 500px;
   overflow: hidden;
 }
 
 .count-image {
-  height: 400px;
-  margin: 50px auto;
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+  margin: 10% auto;
 }
 
 .count-hints-container {
