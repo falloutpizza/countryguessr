@@ -124,3 +124,40 @@ input {
 .next-question-btn {
   margin-top: 10px;
 }
+
+.score {
+  width: fit-content;
+  position: absolute;
+  margin: 20px;
+}
+
+.score h3 {
+  margin: 0;
+}
+
+.cur-score {
+  margin: 0;
+  padding: 0;
+  font-size: 0.8rem;
+  text-align: right;
+  transform: translateY(10px);
+  transition: 0.2s all ease-out;
+  opacity: 0;
+}
+
+.active {
+  transform: translateY(0);
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

@@ -3,7 +3,7 @@ function countryDetails(countries) {
   let random = Math.floor(Math.random() * 250 + 1);
   let randomCountry = countries[random];
   let cont;
-  while (!randomCountry.population) {
+  while (!randomCountry.population || randomCountry.cca2 === "PS") {
     random = Math.floor(Math.random() * 250 + 1);
     randomCountry = countries[random];
   }

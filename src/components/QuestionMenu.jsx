@@ -9,12 +9,15 @@ function HintButton({
   country,
   hintText,
   setHintText,
+  score,
+  setCurScore,
 }) {
   return (
     <button
       className="hint-button"
       onClick={() => {
         setHintText(hintTxt);
+        setCurScore(score);
         if (setNext) {
           setNext(true);
         }
@@ -28,7 +31,18 @@ function HintButton({
   );
 }
 
-function Guess({ setGuess, countryList, guessed, setGuessed, nextQuestion }) {
+function Guess({
+  setGuess,
+  countryList,
+  guessed,
+  setGuessed,
+  nextQuestion,
+  answer,
+  setCurScore,
+  curScore,
+  setTotalScore,
+  totalScore,
+}) {
   const [curGuess, setCurGuess] = useState("");
   const [filteredList, setFilteredList] = useState([]);
 
@@ -50,6 +64,12 @@ function Guess({ setGuess, countryList, guessed, setGuessed, nextQuestion }) {
     if (!guessed) {
       setGuess(e.target[0].value);
       setGuessed(true);
+      if (answer.toLowerCase() !== e.target[0].value.toLowerCase()) {
+        setCurScore(0);
+        setTotalScore(totalScore);
+      } else {
+        setTotalScore(totalScore + curScore);
+      }
     }
   }
 
@@ -115,6 +135,7 @@ function NextQuestion({
   setHint1Text,
   setHint2Text,
   setHint3Text,
+  setCurScore,
 }) {
   return (
     <button
@@ -126,6 +147,7 @@ function NextQuestion({
         setHint1Text("hint #1");
         setHint2Text("hint #2");
         setHint3Text("hint #3");
+        setCurScore(100);
         setCountry(country);
       }}
     >
@@ -134,8 +156,19 @@ function NextQuestion({
   );
 }
 
+function Score({ totalScore, curScore, guessed }) {
+  return (
+    <div className="score">
+      <h3>score: {totalScore}</h3>
+      <p className={guessed ? "cur-score active" : "cur-score"}>+{curScore}</p>
+    </div>
+  );
+}
+
 export default function QuestionMenu({ country, nextQuestion, countryList }) {
   const [curCountry, setCurCountry] = useState(country);
+  const [curScore, setCurScore] = useState(100);
+  const [totalScore, setTotalScore] = useState(0);
 
   const [hint2, setHint2] = useState(false);
   const [hint3, setHint3] = useState(false);
@@ -149,6 +182,7 @@ export default function QuestionMenu({ country, nextQuestion, countryList }) {
 
   return (
     <div className="row">
+      <Score totalScore={totalScore} curScore={curScore} guessed={guessed} />
       <div className="count-image-container col">
         <img src={curCountry.image} className="count-image" />
       </div>
@@ -160,6 +194,11 @@ export default function QuestionMenu({ country, nextQuestion, countryList }) {
           guessed={guessed}
           setGuessed={setGuessed}
           nextQuestion={nextQuestion}
+          answer={curCountry.name}
+          setCurScore={setCurScore}
+          curScore={curScore}
+          setTotalScore={setTotalScore}
+          totalScore={totalScore}
         />
         {guessed && <Results guess={guess} answer={curCountry.name} />}
         <div className="hint-container">
@@ -172,6 +211,8 @@ export default function QuestionMenu({ country, nextQuestion, countryList }) {
             country={curCountry.name}
             hintText={hint1Text}
             setHintText={setHint1Text}
+            score={95}
+            setCurScore={setCurScore}
           />
           <HintButton
             hintNum={curCountry.hint2og}
@@ -182,6 +223,8 @@ export default function QuestionMenu({ country, nextQuestion, countryList }) {
             country={curCountry.name}
             hintText={hint2Text}
             setHintText={setHint2Text}
+            score={90}
+            setCurScore={setCurScore}
           />
           <HintButton
             hintNum={curCountry.hint3og}
@@ -192,6 +235,8 @@ export default function QuestionMenu({ country, nextQuestion, countryList }) {
             country={curCountry.name}
             hintText={hint3Text}
             setHintText={setHint3Text}
+            score={80}
+            setCurScore={setCurScore}
           />
         </div>
         <NextQuestion
@@ -204,6 +249,7 @@ export default function QuestionMenu({ country, nextQuestion, countryList }) {
           setHint1Text={setHint1Text}
           setHint2Text={setHint2Text}
           setHint3Text={setHint3Text}
+          setCurScore={setCurScore}
         />
       </div>
     </div>
