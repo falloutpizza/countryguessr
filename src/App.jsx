@@ -7,14 +7,17 @@ import "./App.css";
 //importing components
 import StartMenu from "./components/StartMenu";
 import QuestionMenu from "./components/QuestionMenu";
+import EndMenu from "./components/EndMenu";
 
 //importing functions
 import countryDetails from "./countryDetails";
 
 function App() {
   const [started, setStarted] = useState(false);
+  const [ended, setEnded] = useState(false);
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState(null);
+  const [totalScore, setTotalScore] = useState(0);
 
   //fetches country data on load
   useEffect(() => {
@@ -44,11 +47,22 @@ function App() {
   return (
     <div className="main-container container-fluid">
       {!started && <StartMenu started={started} setStarted={setStarted} />}
-      {started && country && (
+      {started && country && !ended && (
         <QuestionMenu
           country={country}
           nextQuestion={loadRandomCountry}
           countryList={countries}
+          totalScore={totalScore}
+          setTotalScore={setTotalScore}
+          setEnded={setEnded}
+        />
+      )}
+      {ended && (
+        <EndMenu
+          score={totalScore}
+          setStarted={setStarted}
+          setEnded={setEnded}
+          setTotalScore={setTotalScore}
         />
       )}
     </div>

@@ -139,7 +139,7 @@ function NextQuestion({
 }) {
   return (
     <button
-      className="next-question-btn"
+      className="control-btn"
       onClick={() => {
         setGuessed(false);
         setHint2(false);
@@ -156,6 +156,10 @@ function NextQuestion({
   );
 }
 
+function EndQuiz({ setEnded }) {
+  return <button onClick={() => setEnded(true)}>end quiz</button>;
+}
+
 function Score({ totalScore, curScore, guessed }) {
   return (
     <div className="score">
@@ -165,10 +169,16 @@ function Score({ totalScore, curScore, guessed }) {
   );
 }
 
-export default function QuestionMenu({ country, nextQuestion, countryList }) {
+export default function QuestionMenu({
+  country,
+  nextQuestion,
+  countryList,
+  totalScore,
+  setTotalScore,
+  setEnded,
+}) {
   const [curCountry, setCurCountry] = useState(country);
   const [curScore, setCurScore] = useState(100);
-  const [totalScore, setTotalScore] = useState(0);
 
   const [hint2, setHint2] = useState(false);
   const [hint3, setHint3] = useState(false);
@@ -251,6 +261,7 @@ export default function QuestionMenu({ country, nextQuestion, countryList }) {
           setHint3Text={setHint3Text}
           setCurScore={setCurScore}
         />
+        <EndQuiz setEnded={setEnded} />
       </div>
     </div>
   );

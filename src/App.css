@@ -121,8 +121,8 @@ input {
   cursor: pointer;
 }
 
-.next-question-btn {
-  margin-top: 10px;
+.control-btn {
+  margin: 10px;
 }
 
 .score {
@@ -160,4 +160,8 @@ input {
   100% {
     opacity: 0;
   }
+}
+
+.end-text {
+  margin-top: 100px;
 }
