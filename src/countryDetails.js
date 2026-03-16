@@ -14,7 +14,7 @@ function countryDetails(countries) {
   }
 
   return {
-    image: `src/countries/${randomCountry.cca2.toLowerCase()}/vector.svg`,
+    image: `/countries/${randomCountry.cca2.toLowerCase()}/vector.svg`,
     name: randomCountry.name.common,
     hint1: `This country is in ${cont}`,
     hint2: `The population of this country is ${randomCountry.population}`,
