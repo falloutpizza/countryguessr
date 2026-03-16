@@ -126,6 +126,7 @@ function Results({ guess, answer }) {
 }
 
 function NextQuestion({
+  guessed,
   setGuessed,
   setCountry,
   nextQuestion,
@@ -141,14 +142,16 @@ function NextQuestion({
     <button
       className="control-btn"
       onClick={() => {
-        setGuessed(false);
-        setHint2(false);
-        setHint3(false);
-        setHint1Text("hint #1");
-        setHint2Text("hint #2");
-        setHint3Text("hint #3");
-        setCurScore(100);
-        setCountry(country);
+        if (guessed) {
+          setGuessed(false);
+          setHint2(false);
+          setHint3(false);
+          setHint1Text("hint #1");
+          setHint2Text("hint #2");
+          setHint3Text("hint #3");
+          setCurScore(100);
+          setCountry(country);
+        }
       }}
     >
       next question
@@ -250,6 +253,7 @@ export default function QuestionMenu({
           />
         </div>
         <NextQuestion
+          guessed={guessed}
           setGuessed={setGuessed}
           setCountry={setCurCountry}
           nextQuestion={nextQuestion}

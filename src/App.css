@@ -89,7 +89,8 @@ button:hover {
 }
 
 .count-hints-container {
-  height: 500px;
+  height: 480px;
+  overflow: scroll;
 }
 
 .guess-text {
