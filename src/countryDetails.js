@@ -12,6 +12,10 @@ function countryDetails(countries) {
   } else {
     cont = randomCountry.continents[0];
   }
+  //special case for lebanon
+  if (randomCountry.name.common === "Lebanon") {
+    randomCountry.flags.alt.replace("Lebanese Cedar", "cedar");
+  }
 
   return {
     image: `/countries/${randomCountry.cca2.toLowerCase()}/vector.svg`,
