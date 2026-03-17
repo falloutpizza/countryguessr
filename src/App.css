@@ -14,7 +14,7 @@
     height: fit-content;
   }
   .main-container {
-    margin: 20px;
+    margin: 20px auto !important;
   }
 }
 
@@ -34,8 +34,11 @@
     margin-top: 50px !important;
   }
   button {
-    font-size: 0.5rem;
+    font-size: 0.7rem;
     font-weight: 400;
+  }
+  .hint-button {
+    font-size: 0.7rem !important;
   }
 }
 
@@ -89,7 +92,7 @@ button:hover {
 }
 
 .count-hints-container {
-  height: 480px;
+  height: 90%;
   overflow: scroll;
 }
 

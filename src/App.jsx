@@ -23,10 +23,10 @@ function App() {
   useEffect(() => {
     async function fetchCountries() {
       let response = await axios.get(
-        "https://restcountries.com/v3.1/all?fields=name,population,flags,continents,cca2,status",
+        "https://restcountries.com/v3.1/all?fields=name,population,flags,continents,cca2,status,independent",
       );
       let filteredCountries = response.data.filter(
-        (item) => item.status === "officially-assigned",
+        (item) => item.status === "officially-assigned" && item.independent,
       );
       setCountries(filteredCountries);
     }
