@@ -101,7 +101,7 @@ button:hover {
 }
 
 .hint-container {
-  max-height: 250px;
+  height: 150px;
   overflow: scroll;
 }
 
