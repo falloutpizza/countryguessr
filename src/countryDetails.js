@@ -3,7 +3,7 @@ function countryDetails(countries) {
   let random = Math.floor(Math.random() * 250 + 1);
   let randomCountry = countries[random];
   let cont;
-  while (!randomCountry.population || randomCountry.cca2 === "PS") {
+  while (randomCountry.cca2 === "PS") {
     random = Math.floor(Math.random() * 250 + 1);
     randomCountry = countries[random];
   }
@@ -16,12 +16,14 @@ function countryDetails(countries) {
   if (randomCountry.name.common === "Lebanon") {
     randomCountry.flags.alt.replace("Lebanese Cedar", "cedar");
   }
-
+  const currencyName = Object.keys(randomCountry.currencies)[0];
+  const currencyFull = randomCountry.currencies[currencyName].name;
+  const currency = currencyFull.split(" ").splice(-1)[0];
   return {
     image: `/countries/${randomCountry.cca2.toLowerCase()}/vector.svg`,
     name: randomCountry.name.common,
     hint1: `This country is in ${cont}`,
-    hint2: `The population of this country is ${randomCountry.population}`,
+    hint2: `The currency this country uses is the ${currency}`,
     hint3: randomCountry.flags.alt.replaceAll(randomCountry.name.common, "???"),
   };
 }
